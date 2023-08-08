@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "a1b9df65-8e87-4836-be28-ec0de19f3e1e",
+		"name": "rpn",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "17860717"
+	},
+	"item": [
+		{
+			"name": "push element",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/rpn/stack/1?value=6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"rpn",
+						"stack",
+						"1"
+					],
+					"query": [
+						{
+							"key": "value",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get stack by id",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "http://localhost:9000/rpn/stack/1"
+			},
+			"response": []
+		},
+		{
+			"name": "reset stack",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": "http://localhost:9000/rpn/stack/1"
+			},
+			"response": []
+		},
+		{
+			"name": "execute operation",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": "http://localhost:9000/rpn/op/add/stack/1"
+			},
+			"response": []
+		}
+	]
+}
