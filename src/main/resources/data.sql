@@ -1,0 +1,1 @@
+INSERT INTO stack (STACK_VALUE) VALUES ('5');
