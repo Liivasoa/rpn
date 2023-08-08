@@ -41,7 +41,7 @@ public class StackService {
 	 * @param stackId: Id of the stack to reset
 	 */
 	public Stack resetStackValue(Long stackId) throws NullPointerException {
-		Stack stack = getStackById(stackId);	
+		Stack stack = getStackById(stackId);
 		return updateStackValue(stack, new ArrayList<Integer>());
 	}
 	
@@ -57,6 +57,21 @@ public class StackService {
 		List<Integer> newValues = stack.getStackValue();
 		newValues.add(value);
 		return updateStackValue(stack, newValues);
+	}
+	
+	public Stack executeOperation(Operation op, Long stackId) throws NullPointerException {
+		Stack stack = getStackById(stackId);
+		List<Integer> stackValue = stack.getStackValue();
+		int valueSize = stackValue.size();
+		if (valueSize < 2) {
+			throw new IllegalArgumentException("Invalid stack");
+		}
+		Integer result = op.apply(stackValue.get(valueSize - 1), stackValue.get(valueSize - 2));
+		stackValue.remove(valueSize - 1);
+		stackValue.remove(valueSize - 2);
+		stackValue.add(result);
+		updateStackValue(stack, stackValue);
+		return stack;
 	}
 
 }

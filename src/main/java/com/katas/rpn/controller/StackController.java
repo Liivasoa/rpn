@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.katas.rpn.model.Stack;
 import com.katas.rpn.service.StackService;
+import com.katas.rpn.service.Operation;
 
 @RestController
 @RequestMapping("/rpn")
@@ -63,7 +64,23 @@ public class StackController {
 		} catch (NullPointerException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-		
+	}
+	
+	/**
+	 * Execute operation
+	 * @param op: the operation to execute.
+	 * 				Possible value : add, substract, multiply, divide
+	 * @param id: stack id
+	 * @return
+	 */
+	@PatchMapping("/op/{op}/stack/{id}")
+	public ResponseEntity<Object> operation(@PathVariable Operation op, @PathVariable Long id) {
+		try {
+			Stack stack = stackService.executeOperation(op, id);
+			return ResponseEntity.ok(stack);
+		} catch (RuntimeException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 	}
 
 }
